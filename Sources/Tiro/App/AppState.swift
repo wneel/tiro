@@ -11,6 +11,8 @@ final class AppState: ObservableObject {
 	@Published private(set) var recordingStartedAt: Date?
 	/// The call app let go of the microphone: nothing is captured, and the file is saved unless the call comes back.
 	@Published private(set) var isFinishing = false
+	/// An in-person meeting started from the menu: microphone only, stopped from the menu or by long silence.
+	@Published private(set) var isInPerson = false
 	/// Ticks every second while recording, so the elapsed time redraws.
 	@Published private(set) var now = Date()
 
@@ -23,6 +25,9 @@ final class AppState: ObservableObject {
 	private var started = false
 
 	var isRecording: Bool { recordingAppName != nil }
+
+	/// An in-person recording stops by itself after this much silence, in case it was left running.
+	static let inPersonSilenceLimit: TimeInterval = 600
 
 	private init() {}
 
@@ -53,6 +58,10 @@ final class AppState: ObservableObject {
 
 	var statusText: String {
 		if isFinishing { return String(localized: "Call ended · saving…") }
+		if isInPerson, let start = recordingStartedAt {
+			let elapsed = Self.formatDuration(now.timeIntervalSince(start))
+			return String(localized: "Recording in person · \(elapsed)")
+		}
 		if let app = recordingAppName, let start = recordingStartedAt {
 			let elapsed = Self.formatDuration(now.timeIntervalSince(start))
 			return String(localized: "Recording \(app) · \(elapsed)")
@@ -77,6 +86,10 @@ final class AppState: ObservableObject {
 	// MARK: Calls
 
 	private func callStarted(_ call: ActiveCall) {
+		if isInPerson {
+			Log.info("Call in \(call.appName) not recorded: an in-person recording is running")
+			return
+		}
 		if preferences.isPaused {
 			Log.info("Call in \(call.appName) not recorded: Tiro is paused")
 			return
@@ -93,12 +106,13 @@ final class AppState: ObservableObject {
 	}
 
 	private func microphoneReleased() {
-		guard isRecording else { return }
+		guard isRecording, !isInPerson else { return }
 		recorder.suspend()
 		isFinishing = true
 	}
 
 	private func microphoneRetaken() {
+		guard !isInPerson else { return }
 		if isRecording {
 			isFinishing = false
 			recorder.resume()
@@ -109,7 +123,7 @@ final class AppState: ObservableObject {
 	}
 
 	private func callEnded() {
-		guard isRecording else { return }
+		guard isRecording, !isInPerson else { return }
 		stopRecording()
 	}
 
@@ -140,15 +154,51 @@ final class AppState: ObservableObject {
 		}
 	}
 
+	// MARK: In person
+
+	/// Starts recording the microphone for a meeting in the room. Works while auto-record is paused.
+	func startInPerson() {
+		guard !isRecording, stopTask == nil else { return }
+		let folder = preferences.recordingsFolder
+		guard ensureFolder(folder) else { return }
+		do {
+			try recorder.start(appName: CallRecorder.inPersonName, folder: folder, kind: .inPerson)
+			isInPerson = true
+			recordingAppName = CallRecorder.inPersonName
+			recordingStartedAt = Date()
+			now = Date()
+			Log.info("Recording in person into \(folder.path)")
+		} catch {
+			Log.error("Could not start the in-person recording: \(error.localizedDescription)")
+			Notifier.shared.post(title: String(localized: "Tiro could not start recording"), body: error.localizedDescription)
+		}
+	}
+
+	func stopInPerson() {
+		guard isInPerson else { return }
+		stopRecording()
+	}
+
+	private func checkInPersonSilence() {
+		guard isInPerson, stopTask == nil, let silence = recorder.secondsSinceVoice(), silence >= Self.inPersonSilenceLimit else { return }
+		Log.info("In-person recording stopped after \(Int(silence)) s of silence")
+		stopRecording(trimToLastVoice: true)
+		Notifier.shared.post(
+			title: String(localized: "Recording stopped"),
+			body: String(localized: "Nothing was heard for 10 minutes, so Tiro stopped and kept everything up to the last sound.")
+		)
+	}
+
 	@discardableResult
-	private func stopRecording() -> Task<Void, Never> {
+	private func stopRecording(trimToLastVoice: Bool = false) -> Task<Void, Never> {
 		if let stopTask { return stopTask }
 		guard let appName = recordingAppName else { return Task {} }
 		recordingAppName = nil
 		recordingStartedAt = nil
 		isFinishing = false
+		isInPerson = false
 		let task = Task {
-			let result = await self.recorder.stop()
+			let result = await self.recorder.stop(trimToLastVoice: trimToLastVoice)
 			self.stopTask = nil
 			self.handleFinished(result, appName: appName)
 		}
@@ -163,7 +213,7 @@ final class AppState: ObservableObject {
 
 	private func handleFinished(_ recording: FinishedRecording?, appName: String) {
 		guard let recording else {
-			Log.info("Call in \(appName) lasted under 15 s: recording discarded")
+			Log.info("Recording of \(appName) too short to keep: discarded")
 			return
 		}
 		let file = recording.audioURL.lastPathComponent
@@ -226,12 +276,13 @@ final class AppState: ObservableObject {
 
 	// MARK: Pause
 
-	/// Pauses auto-record for `duration` seconds, or until resumed when nil. Stops a recording in progress.
+	/// Pauses auto-record for `duration` seconds, or until resumed when nil. Stops a call recording in
+	/// progress; an in-person recording keeps going, since the user started it.
 	func pause(for duration: TimeInterval?) {
 		let until = duration.map { Date().addingTimeInterval($0) } ?? .distantFuture
 		preferences.pausedUntil = until
 		Log.info(duration == nil ? "Paused until resumed" : "Paused until \(until)")
-		if isRecording {
+		if isRecording, !isInPerson {
 			Log.info("Pause started during a call: stopping the recording")
 			stopRecording()
 		}
@@ -306,6 +357,7 @@ final class AppState: ObservableObject {
 
 	private func tick() {
 		if isRecording, !isFinishing { now = Date() }
+		checkInPersonSilence()
 		if let until = preferences.pausedUntil, until <= Date() {
 			preferences.pausedUntil = nil
 			Log.info("Pause ended")

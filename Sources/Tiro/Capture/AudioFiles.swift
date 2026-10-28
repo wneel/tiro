@@ -75,8 +75,9 @@ enum AudioExport {
 		return Info(frames: frames, sampleRate: format.mSampleRate, channels: Int(format.mChannelsPerFrame))
 	}
 
-	/// Encodes `source` to an AAC .m4a at `destination` with the same rate and channel count.
-	static func encodeM4A(from source: URL, to destination: URL) throws {
+	/// Encodes `source` to an AAC .m4a at `destination` with the same rate and channel count, or only its
+	/// left channel as mono when `monoFromLeft`. Stops after `maxFrames` when given.
+	static func encodeM4A(from source: URL, to destination: URL, monoFromLeft: Bool = false, maxFrames: Int64? = nil) throws {
 		var input: ExtAudioFileRef?
 		try AudioHAL.check(ExtAudioFileOpenURL(source as CFURL, &input), "ExtAudioFileOpenURL")
 		guard let input else { throw CaptureError.file("Cannot open \(source.lastPathComponent)") }
@@ -93,28 +94,43 @@ enum AudioExport {
 			mChannelsPerFrame: channels, mBitsPerChannel: 32, mReserved: 0)
 		try AudioHAL.check(ExtAudioFileSetProperty(input, kExtAudioFileProperty_ClientDataFormat, size, &client), "input ClientDataFormat")
 
+		let outChannels: UInt32 = monoFromLeft ? 1 : channels
+		var outClient = client
+		outClient.mChannelsPerFrame = outChannels
+		outClient.mBytesPerPacket = 4 * outChannels
+		outClient.mBytesPerFrame = 4 * outChannels
 		var aac = AudioStreamBasicDescription()
 		aac.mSampleRate = fileFormat.mSampleRate
 		aac.mFormatID = kAudioFormatMPEG4AAC
-		aac.mChannelsPerFrame = channels
+		aac.mChannelsPerFrame = outChannels
 		aac.mFramesPerPacket = 1024
 		var outputRef: ExtAudioFileRef?
 		try AudioHAL.check(ExtAudioFileCreateWithURL(destination as CFURL, kAudioFileM4AType, &aac, nil, AudioFileFlags.eraseFile.rawValue, &outputRef), "ExtAudioFileCreateWithURL")
 		guard let output = outputRef else { throw CaptureError.file("Cannot create \(destination.lastPathComponent)") }
 		var outputOpen = true
 		defer { if outputOpen { ExtAudioFileDispose(output) } }
-		try AudioHAL.check(ExtAudioFileSetProperty(output, kExtAudioFileProperty_ClientDataFormat, size, &client), "output ClientDataFormat")
-		setBitRate(on: output, bitRate: bitRatePerChannel * channels)
+		try AudioHAL.check(ExtAudioFileSetProperty(output, kExtAudioFileProperty_ClientDataFormat, size, &outClient), "output ClientDataFormat")
+		setBitRate(on: output, bitRate: bitRatePerChannel * outChannels)
 
 		let chunk: UInt32 = 8192
 		let buffer = UnsafeMutablePointer<Float>.allocate(capacity: Int(chunk * channels))
 		defer { buffer.deallocate() }
-		while true {
-			var frames = chunk
-			var list = AudioBufferList(mNumberBuffers: 1, mBuffers: AudioBuffer(mNumberChannels: channels, mDataByteSize: chunk * 4 * channels, mData: buffer))
+		let mono = UnsafeMutablePointer<Float>.allocate(capacity: Int(chunk))
+		defer { mono.deallocate() }
+		var remaining = maxFrames ?? .max
+		while remaining > 0 {
+			var frames = UInt32(min(Int64(chunk), remaining))
+			var list = AudioBufferList(mNumberBuffers: 1, mBuffers: AudioBuffer(mNumberChannels: channels, mDataByteSize: frames * 4 * channels, mData: buffer))
 			try AudioHAL.check(ExtAudioFileRead(input, &frames, &list), "ExtAudioFileRead")
 			if frames == 0 { break }
-			try AudioHAL.check(ExtAudioFileWrite(output, frames, &list), "ExtAudioFileWrite")
+			remaining -= Int64(frames)
+			if monoFromLeft {
+				for frame in 0..<Int(frames) { mono[frame] = buffer[frame * Int(channels)] }
+				var monoList = AudioBufferList(mNumberBuffers: 1, mBuffers: AudioBuffer(mNumberChannels: 1, mDataByteSize: frames * 4, mData: mono))
+				try AudioHAL.check(ExtAudioFileWrite(output, frames, &monoList), "ExtAudioFileWrite")
+			} else {
+				try AudioHAL.check(ExtAudioFileWrite(output, frames, &list), "ExtAudioFileWrite")
+			}
 		}
 		outputOpen = false
 		// Dispose writes the moov atom; its failure means an unusable file.

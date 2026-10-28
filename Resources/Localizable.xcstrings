@@ -581,6 +581,16 @@
         }
       }
     },
+    "Nothing was heard for 10 minutes, so Tiro stopped and kept everything up to the last sound.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien n’a été entendu pendant 10 minutes : Tiro s’est arrêté et a tout gardé jusqu’au dernier son."
+          }
+        }
+      }
+    },
     "Notifications": {
       "localizations": {
         "fr": {
@@ -767,6 +777,16 @@
         }
       }
     },
+    "Recording in person · %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement en présentiel · %@"
+          }
+        }
+      }
+    },
     "Recording recovered": {
       "localizations": {
         "fr": {
@@ -783,6 +803,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistrement sauvegardé"
+          }
+        }
+      }
+    },
+    "Recording stopped": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement arrêté"
           }
         }
       }
@@ -867,6 +897,16 @@
         }
       }
     },
+    "Start Recording": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrer l’enregistrement"
+          }
+        }
+      }
+    },
     "Start Using Tiro": {
       "localizations": {
         "fr": {
@@ -883,6 +923,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Démarrage"
+          }
+        }
+      }
+    },
+    "Stop Recording": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter l’enregistrement"
           }
         }
       }
@@ -1003,6 +1053,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tiro n’a pas pu enregistrer cet appel"
+          }
+        }
+      }
+    },
+    "Tiro could not start recording": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro n’a pas pu démarrer l’enregistrement"
           }
         }
       }

@@ -11,6 +11,7 @@ Tiro was Cicero's secretary. He sat in on every speech and invented a shorthand,
 - Starts and stops on its own: a call begins when a watched app holds the microphone, in a native app or in a browser.
 - Records both sides: your microphone on the left channel, the sound your Mac plays (the other participants) on the right.
 - Saves one AAC file per call, named after the date and the app, for example `2026-10-28_1430_Microsoft Teams.m4a`. Calls under 15 seconds are discarded.
+- Records meetings in the room too: choose Start Recording in the menu bar, and Stop Recording at the end. Only the microphone is recorded, into a file named like `2026-10-28_1430_Meeting.m4a`. If you forget to stop, Tiro stops after 10 minutes of silence and keeps everything up to the last sound.
 - Survives a crash: audio is written to disk as it comes in, and an interrupted recording is recovered at the next launch.
 - Optional on-device transcription to `.txt` and `.srt`, next to the audio file. Off by default.
 - Pause for an hour or until you resume, from the menu bar.
@@ -67,7 +68,7 @@ Tiro can tell Claude, or any assistant that can read files on your Mac (Claude C
 
 The prompt, with your own folder in place of `~/Tiro`:
 
-> Remember this for our future conversations: I record my calls with Tiro, a Mac app. Each call is saved in the folder ~/Tiro as an audio file named by date, time and app, like 2026-10-28_1430_Teams.m4a. In the audio, the left channel is me and the right channel is everyone else. When transcription is on, a transcript with the same name sits next to it: a .txt where each line starts with the time and the speaker (You or Others), and a .srt. When I ask for my last meeting, my meeting notes, or a call from a given day or app, look in that folder, pick the matching file by its name, and read its .txt transcript. If there is no transcript yet, tell me: you can transcribe the audio yourself if you have a tool for it, or I can turn on transcription in Tiro's settings.
+> Remember this for our future conversations: I record my calls with Tiro, a Mac app. Each call is saved in the folder ~/Tiro as an audio file named by date, time and app, like 2026-10-28_1430_Teams.m4a. In the audio, the left channel is me and the right channel is everyone else. Files named like 2026-10-28_1430_Meeting.m4a are in-person meetings recorded from the microphone only: one channel, and no speaker labels in the transcript. When transcription is on, a transcript with the same name sits next to it: a .txt where each line starts with the time and the speaker (You or Others), and a .srt. When I ask for my last meeting, my meeting notes, or a call from a given day or app, look in that folder, pick the matching file by its name, and read its .txt transcript. If there is no transcript yet, tell me: you can transcribe the audio yourself if you have a tool for it, or I can turn on transcription in Tiro's settings.
 
 ## Build from source
 

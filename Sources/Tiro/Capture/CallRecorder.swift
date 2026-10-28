@@ -14,7 +14,18 @@ struct FinishedRecording {
 /// Thread-safe. Meant to be driven from the main actor: `start` blocks for the ~50 ms Core Audio setup,
 /// `stop` suspends while the file is finalised and encoded off the main thread.
 final class CallRecorder {
+	/// A call is detected; an in-person meeting is started from the menu and records the microphone only.
+	enum Kind {
+		case call, inPerson
+	}
+
 	static let minimumDuration: TimeInterval = 15
+	/// Started on purpose, so only an accidental click is thrown away.
+	static let inPersonMinimumDuration: TimeInterval = 3
+	/// The name in-person files carry in place of an app, which is also how a leftover is recognised.
+	static let inPersonName = "Meeting"
+	/// Kept after the last sound when the silence stop trims the end.
+	static let silenceTail: TimeInterval = 2
 	static let inProgressFolderName = ".inprogress"
 
 	var isRecording: Bool { locked { current != nil } }
@@ -32,6 +43,7 @@ final class CallRecorder {
 
 	/// Mutable state is only touched on the control queue.
 	private final class Recording: @unchecked Sendable {
+		let kind: Kind
 		let appName: String
 		let startedAt: Date
 		let folder: URL
@@ -45,7 +57,8 @@ final class CallRecorder {
 		var stopped = false
 		var suspended = false
 
-		init(appName: String, startedAt: Date, folder: URL, tempURL: URL, writer: CafWriter) {
+		init(kind: Kind, appName: String, startedAt: Date, folder: URL, tempURL: URL, writer: CafWriter) {
+			self.kind = kind
 			self.appName = appName
 			self.startedAt = startedAt
 			self.folder = folder
@@ -56,7 +69,7 @@ final class CallRecorder {
 
 	init() {}
 
-	func start(appName: String, folder: URL) throws {
+	func start(appName: String, folder: URL, kind: Kind = .call) throws {
 		try locked {
 			guard current == nil, !starting else { throw CaptureError.alreadyRecording }
 			starting = true
@@ -79,7 +92,7 @@ final class CallRecorder {
 			Self.release(tempURL)
 			throw error
 		}
-		let recording = Recording(appName: appName, startedAt: startedAt, folder: folder, tempURL: tempURL, writer: writer)
+		let recording = Recording(kind: kind, appName: appName, startedAt: startedAt, folder: folder, tempURL: tempURL, writer: writer)
 		writer.onStall = { [weak self, weak recording] reason in
 			guard let self, let recording else { return }
 			self.control.async { self.handleStall(recording, reason: reason) }
@@ -137,8 +150,14 @@ final class CallRecorder {
 		}
 	}
 
-	/// Stops capture and returns the saved .m4a, or nil when the call lasted under 15 s (its file is deleted).
-	func stop() async -> FinishedRecording? {
+	/// Seconds since the microphone last carried sound in the current recording, or nil when idle.
+	func secondsSinceVoice() -> TimeInterval? {
+		locked { current }?.writer.secondsSinceVoice()
+	}
+
+	/// Stops capture and returns the saved .m4a, or nil when it was too short to keep (its file is deleted).
+	/// With `trimToLastVoice`, the saved file ends shortly after the microphone last carried sound.
+	func stop(trimToLastVoice: Bool = false) async -> FinishedRecording? {
 		let recording: Recording? = locked {
 			let recording = current
 			current = nil
@@ -156,7 +175,7 @@ final class CallRecorder {
 				let summary = recording.writer.finish()
 				Self.conversionQueue.async {
 					defer { Self.release(recording.tempURL) }
-					continuation.resume(returning: Self.finalize(recording, summary: summary))
+					continuation.resume(returning: Self.finalize(recording, summary: summary, trimToLastVoice: trimToLastVoice))
 				}
 			}
 		}
@@ -265,27 +284,33 @@ final class CallRecorder {
 
 	// MARK: - Finalising
 
-	private static func finalize(_ recording: Recording, summary: CafWriter.Summary) -> FinishedRecording? {
-		let duration = Double(summary.frames) / CafWriter.fileSampleRate
-		Log.info("Recording stopped after \(String(format: "%.1f", duration)) s: mic peak \(decibels(summary.peakMic)), system peak \(decibels(summary.peakSystem)), \(summary.droppedFrames) frames dropped")
-		if summary.peakSystem == 0 && duration > 0 {
+	private static func finalize(_ recording: Recording, summary: CafWriter.Summary, trimToLastVoice: Bool) -> FinishedRecording? {
+		var frames = summary.frames
+		Log.info("Recording stopped after \(String(format: "%.1f", Double(frames) / CafWriter.fileSampleRate)) s: mic peak \(decibels(summary.peakMic)), system peak \(decibels(summary.peakSystem)), \(summary.droppedFrames) frames dropped")
+		if recording.kind == .call && summary.peakSystem == 0 && frames > 0 {
 			Log.info("System audio was pure digital silence (nothing played, or the System Audio Recording permission is missing)")
 		}
-		guard duration >= minimumDuration, !(summary.writeFailed && summary.frames == 0) else {
+		if trimToLastVoice {
+			frames = min(frames, summary.lastVoiceFrame + Int64(silenceTail * CafWriter.fileSampleRate))
+			Log.info("Trimmed to \(String(format: "%.1f", Double(frames) / CafWriter.fileSampleRate)) s, the last sound plus \(Int(silenceTail)) s")
+		}
+		let duration = Double(frames) / CafWriter.fileSampleRate
+		let minimum = recording.kind == .inPerson ? inPersonMinimumDuration : minimumDuration
+		guard duration >= minimum, !(summary.writeFailed && summary.frames == 0) else {
 			try? FileManager.default.removeItem(at: recording.tempURL)
-			Log.info("Recording shorter than \(Int(minimumDuration)) s, discarded")
+			Log.info("Recording shorter than \(Int(minimum)) s, discarded")
 			return nil
 		}
-		return export(recording.tempURL, folder: recording.folder, appName: recording.appName, startedAt: recording.startedAt, duration: duration)
+		return export(recording.tempURL, folder: recording.folder, appName: recording.appName, startedAt: recording.startedAt, duration: duration, kind: recording.kind, maxFrames: trimToLastVoice ? frames : nil)
 	}
 
-	private static func export(_ caf: URL, folder: URL, appName: String, startedAt: Date, duration: TimeInterval) -> FinishedRecording? {
+	private static func export(_ caf: URL, folder: URL, appName: String, startedAt: Date, duration: TimeInterval, kind: Kind, maxFrames: Int64? = nil) -> FinishedRecording? {
 		let fileManager = FileManager.default
 		let base = RecordingName.base(startedAt: startedAt, appName: appName)
 		let partial = caf.deletingPathExtension().appendingPathExtension("partial.m4a")
 		let began = Date()
 		do {
-			try AudioExport.encodeM4A(from: caf, to: partial)
+			try AudioExport.encodeM4A(from: caf, to: partial, monoFromLeft: kind == .inPerson, maxFrames: maxFrames)
 			let destination = RecordingName.unique(in: folder, base: base, ext: "m4a")
 			try fileManager.moveItem(at: partial, to: destination)
 			try? fileManager.removeItem(at: caf)
@@ -322,16 +347,18 @@ final class CallRecorder {
 			do {
 				guard try CafFile.repair(url) else { throw CaptureError.file("not a CAF file") }
 				let info = try AudioExport.info(of: url)
-				guard info.duration >= minimumDuration else {
-					try? fileManager.removeItem(at: url)
-					Log.info("Leftover \(url.lastPathComponent) is shorter than \(Int(minimumDuration)) s, discarded")
-					continue
-				}
 				let parsed = RecordingName.parse(base)
 				let startedAt = parsed?.startedAt ?? (try? url.resourceValues(forKeys: [.creationDateKey]).creationDate) ?? Date()
 				let appName = parsed?.appName ?? base
+				let kind: Kind = appName.hasPrefix(inPersonName) ? .inPerson : .call
+				let minimum = kind == .inPerson ? inPersonMinimumDuration : minimumDuration
+				guard info.duration >= minimum else {
+					try? fileManager.removeItem(at: url)
+					Log.info("Leftover \(url.lastPathComponent) is shorter than \(Int(minimum)) s, discarded")
+					continue
+				}
 				Log.info("Recovering \(url.lastPathComponent) (\(String(format: "%.1f", info.duration)) s)")
-				if let result = export(url, folder: folder, appName: appName, startedAt: startedAt, duration: info.duration) {
+				if let result = export(url, folder: folder, appName: appName, startedAt: startedAt, duration: info.duration, kind: kind) {
 					recovered.append(result)
 				}
 			} catch {

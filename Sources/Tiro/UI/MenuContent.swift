@@ -41,6 +41,15 @@ struct MenuContent: View {
 
 		Divider()
 
+		if state.isInPerson {
+			Button("Stop Recording") { state.stopInPerson() }
+		} else {
+			Button("Start Recording") { state.startInPerson() }
+				.disabled(state.isRecording)
+		}
+
+		Divider()
+
 		if preferences.isPaused {
 			Button("Resume") { state.resume() }
 		} else {

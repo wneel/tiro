@@ -12,6 +12,10 @@ final class CafWriter {
 	static let bytesPerFrame = 4
 	private static let chunkFrames: AVAudioFrameCount = 4096
 	private static let stallTimeout: TimeInterval = 3
+	/// A chunk whose microphone peak passes this (-52 dBFS) counts as sound. Measured on a MacBook Pro mic:
+	/// a quiet room peaks at -61 to -67 dBFS, a voice from the laptop speakers arrives at -46 to -54 dBFS.
+	/// Set low on purpose: too low only means the in-person silence stop never fires, too high cuts speech.
+	private static let voiceThreshold: Float = 0.0025
 
 	struct Summary {
 		let frames: Int64
@@ -19,6 +23,8 @@ final class CafWriter {
 		let peakSystem: Float
 		let droppedFrames: Int64
 		let writeFailed: Bool
+		/// The frame right after the last chunk where the microphone carried sound.
+		let lastVoiceFrame: Int64
 	}
 
 	let url: URL
@@ -43,6 +49,7 @@ final class CafWriter {
 	private var stallReported = false
 	private var droppedFrames: Int64 = 0
 	private var peakMic: Float = 0
+	private var lastVoiceFrame: Int64 = 0
 	private var peakSystem: Float = 0
 	private var writeFailed = false
 	private var closed = false
@@ -115,8 +122,13 @@ final class CafWriter {
 				fsync(fd)
 				close(fd)
 			}
-			return Summary(frames: framesWritten, peakMic: peakMic, peakSystem: peakSystem, droppedFrames: droppedFrames, writeFailed: writeFailed)
+			return Summary(frames: framesWritten, peakMic: peakMic, peakSystem: peakSystem, droppedFrames: droppedFrames, writeFailed: writeFailed, lastVoiceFrame: lastVoiceFrame)
 		}
+	}
+
+	/// Seconds of audio written since the microphone last carried sound.
+	func secondsSinceVoice() -> TimeInterval {
+		queue.sync { Double(framesWritten - lastVoiceFrame) / Self.fileSampleRate }
 	}
 
 	/// Closes and deletes the file (start failed before anything was recorded).
@@ -221,14 +233,17 @@ final class CafWriter {
 		ensureScratch(frames: frames)
 		let mic = channels[0]
 		let system = channels[1]
+		var chunkPeak: Float = 0
 		for frame in 0..<frames {
 			let left = mic[frame]
 			let right = system[frame]
-			peakMic = max(peakMic, abs(left))
+			chunkPeak = max(chunkPeak, abs(left))
 			peakSystem = max(peakSystem, abs(right))
 			scratch[frame * 2] = Self.int16(left).littleEndian
 			scratch[frame * 2 + 1] = Self.int16(right).littleEndian
 		}
+		peakMic = max(peakMic, chunkPeak)
+		if chunkPeak > Self.voiceThreshold { lastVoiceFrame = framesWritten + Int64(frames) }
 		writeFrames(frames)
 	}
 
