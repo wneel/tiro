@@ -18,7 +18,7 @@ Requires macOS 14.4 or later, on Apple silicon or Intel.
 
 ## Install
 
-1. Download `Tiro-<version>.dmg` from the [latest release](https://github.com/wneel/tiro/releases/latest). Until the first signed release is out, build it from source (see below).
+1. Download `Tiro-<version>.dmg` from the [latest release](https://github.com/wneel/tiro/releases/latest).
 
 2. Open it and drag Tiro to Applications.
 
