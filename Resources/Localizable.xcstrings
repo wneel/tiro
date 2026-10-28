@@ -1,0 +1,1268 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ was saved after Tiro stopped unexpectedly.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ a été sauvegardé après un arrêt inattendu de Tiro."
+          }
+        }
+      }
+    },
+    "A call starts when one of these apps uses the microphone. Browsers count, so calls in Google Meet or Teams on the web are caught too.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un appel commence quand l’une de ces apps utilise le micro. Les navigateurs comptent aussi : les appels Google Meet ou Teams sur le web sont donc détectés."
+          }
+        }
+      }
+    },
+    "A free tool by Animalert, a French non-profit.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un outil gratuit d’Animalert, une association française."
+          }
+        }
+      }
+    },
+    "A whisper.cpp model in ggml format (.bin). When set, it replaces the model above.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un modèle whisper.cpp au format ggml (.bin). S’il est choisi, il remplace le modèle ci-dessus."
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos"
+          }
+        }
+      }
+    },
+    "About Tiro": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À propos de Tiro"
+          }
+        }
+      }
+    },
+    "Add": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter"
+          }
+        }
+      }
+    },
+    "Add App…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une app…"
+          }
+        }
+      }
+    },
+    "Allow Microphone": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser le micro"
+          }
+        }
+      }
+    },
+    "Allow Notifications": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser les notifications"
+          }
+        }
+      }
+    },
+    "Allow System Audio": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser l’audio du système"
+          }
+        }
+      }
+    },
+    "Allow Tiro in System Settings, under Login Items.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisez Tiro dans Réglages Système, rubrique Ouverture."
+          }
+        }
+      }
+    },
+    "Apps": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps"
+          }
+        }
+      }
+    },
+    "Ask Claude about your calls": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandez à Claude vos notes d’appel"
+          }
+        }
+      }
+    },
+    "Automatic": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        }
+      }
+    },
+    "Automatic detects the language of each call. Pick one if your calls are always in the same language.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En automatique, la langue de chaque appel est détectée. Choisissez-en une si vos appels sont toujours dans la même langue."
+          }
+        }
+      }
+    },
+    "Back": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour"
+          }
+        }
+      }
+    },
+    "Balanced (small)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Équilibré (small)"
+          }
+        }
+      }
+    },
+    "Before your first call": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant votre premier appel"
+          }
+        }
+      }
+    },
+    "Best (large-v3 turbo)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le plus précis (large-v3 turbo)"
+          }
+        }
+      }
+    },
+    "Call ended · saving…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appel terminé · sauvegarde…"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        }
+      }
+    },
+    "Change…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier…"
+          }
+        }
+      }
+    },
+    "Choose": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir"
+          }
+        }
+      }
+    },
+    "Choose a whisper.cpp model file (.bin).": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un fichier de modèle whisper.cpp (.bin)."
+          }
+        }
+      }
+    },
+    "Choose the apps you make calls with.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez les apps avec lesquelles vous passez vos appels."
+          }
+        }
+      }
+    },
+    "Choose where Tiro saves your recordings.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez où Tiro range vos enregistrements."
+          }
+        }
+      }
+    },
+    "Choose…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir…"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
+    "Copied": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        }
+      }
+    },
+    "Copy Prompt": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier le prompt"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer"
+          }
+        }
+      }
+    },
+    "Delete %@?": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer %@ ?"
+          }
+        }
+      }
+    },
+    "Delete…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer…"
+          }
+        }
+      }
+    },
+    "Download": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger"
+          }
+        }
+      }
+    },
+    "Download a model in Settings, under Transcription.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargez un modèle dans les réglages, onglet Transcription."
+          }
+        }
+      }
+    },
+    "Downloaded": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléchargé"
+          }
+        }
+      }
+    },
+    "Each call is saved as an audio file, with the transcript next to it when transcription is on.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chaque appel est sauvegardé dans un fichier audio, avec sa transcription à côté quand elle est activée."
+          }
+        }
+      }
+    },
+    "Everything stays on this Mac: the audio and the transcript never leave it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout reste sur ce Mac : l’audio et la transcription n’en sortent jamais."
+          }
+        }
+      }
+    },
+    "Fast (base)": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapide (base)"
+          }
+        }
+      }
+    },
+    "Finish Setting Up Tiro…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminer la configuration de Tiro…"
+          }
+        }
+      }
+    },
+    "Folder": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
+          }
+        }
+      }
+    },
+    "If no prompt appeared, turn on Tiro in Privacy & Security, Screen & System Audio Recording.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si aucune demande ne s’est affichée, activez Tiro dans Confidentialité et sécurité, rubrique Enregistrement de l’écran et de l’audio du système."
+          }
+        }
+      }
+    },
+    "In many countries, including France, everyone on a call must agree to be recorded. Tell them at the start of the call.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans de nombreux pays, dont la France, chaque personne présente sur un appel doit accepter d’être enregistrée. Prévenez-les au début de l’appel."
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
+          }
+        }
+      }
+    },
+    "Larger models are more accurate and slower. A model is downloaded only when you ask for it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les grands modèles sont plus précis, mais plus lents. Un modèle n’est téléchargé que lorsque vous le demandez."
+          }
+        }
+      }
+    },
+    "Log file": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier journal"
+          }
+        }
+      }
+    },
+    "MIT License": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licence MIT"
+          }
+        }
+      }
+    },
+    "Microphone access is off, so only the other side is recorded. Turn on Tiro in Privacy & Security, Microphone.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accès au micro est coupé : seuls les autres participants sont enregistrés. Activez Tiro dans Confidentialité et sécurité, Microphone."
+          }
+        }
+      }
+    },
+    "Microphone access is off. Turn on Tiro in Privacy & Security, Microphone.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’accès au micro est désactivé. Activez Tiro dans Confidentialité et sécurité, rubrique Micro."
+          }
+        }
+      }
+    },
+    "Microphone allowed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Micro autorisé"
+          }
+        }
+      }
+    },
+    "Model": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèle"
+          }
+        }
+      }
+    },
+    "Model file": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier du modèle"
+          }
+        }
+      }
+    },
+    "Models": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modèles"
+          }
+        }
+      }
+    },
+    "Named after Tiro, Cicero's secretary, who sat in on every speech and invented a shorthand to keep up.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro doit son nom à Tiron, le secrétaire de Cicéron : il assistait à chaque discours et inventa une écriture abrégée pour suivre le rythme."
+          }
+        }
+      }
+    },
+    "No transcription model": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun modèle de transcription"
+          }
+        }
+      }
+    },
+    "None": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun"
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
+          }
+        }
+      }
+    },
+    "Notifications allowed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications autorisées"
+          }
+        }
+      }
+    },
+    "Notifications are off. Tiro still records, but it cannot tell you.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications sont désactivées. Tiro enregistre quand même, mais ne peut pas vous prévenir."
+          }
+        }
+      }
+    },
+    "Open": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir"
+          }
+        }
+      }
+    },
+    "Open Login Items": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les réglages"
+          }
+        }
+      }
+    },
+    "Open Recordings Folder": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le dossier des enregistrements"
+          }
+        }
+      }
+    },
+    "Open System Settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages Système"
+          }
+        }
+      }
+    },
+    "Open Tiro at login": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Tiro à l’ouverture de session"
+          }
+        }
+      }
+    },
+    "Open at login": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À l’ouverture de session"
+          }
+        }
+      }
+    },
+    "Others": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres"
+          }
+        }
+      }
+    },
+    "Paste this once into Claude, or any assistant that can read files on this Mac, and ask it to remember it. Then just ask for your last meeting notes.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collez-le une fois dans Claude, ou dans tout assistant qui peut lire les fichiers de ce Mac, en lui demandant de le retenir. Ensuite, demandez simplement les notes de votre dernière réunion."
+          }
+        }
+      }
+    },
+    "Paste this prompt once into Claude, or any assistant that can read files on this Mac. Then ask it for your last meeting notes.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collez ce prompt une fois dans Claude, ou dans tout assistant qui peut lire les fichiers de ce Mac. Demandez-lui ensuite les notes de votre dernière réunion."
+          }
+        }
+      }
+    },
+    "Pause Until Resumed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre en pause jusqu’à la reprise"
+          }
+        }
+      }
+    },
+    "Pause for 1 Hour": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre en pause pendant 1 heure"
+          }
+        }
+      }
+    },
+    "Paused until %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En pause jusqu’à %@"
+          }
+        }
+      }
+    },
+    "Paused until you resume": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En pause jusqu’à la reprise"
+          }
+        }
+      }
+    },
+    "Quit Tiro": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter Tiro"
+          }
+        }
+      }
+    },
+    "Recording %@ · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Recording %1$@ · %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement %@ · %@"
+          }
+        }
+      }
+    },
+    "Recording recovered": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement récupéré"
+          }
+        }
+      }
+    },
+    "Recording saved": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement sauvegardé"
+          }
+        }
+      }
+    },
+    "Recording: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrement : %@"
+          }
+        }
+      }
+    },
+    "Recordings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrements"
+          }
+        }
+      }
+    },
+    "Remove": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer"
+          }
+        }
+      }
+    },
+    "Reset to Defaults": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rétablir la liste d’origine"
+          }
+        }
+      }
+    },
+    "Resume": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages…"
+          }
+        }
+      }
+    },
+    "Show in Finder": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher dans le Finder"
+          }
+        }
+      }
+    },
+    "Source code on GitHub": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code source sur GitHub"
+          }
+        }
+      }
+    },
+    "Start Using Tiro": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "Startup": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Démarrage"
+          }
+        }
+      }
+    },
+    "Stop Using It": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne plus l’utiliser"
+          }
+        }
+      }
+    },
+    "Tell everyone on the call that it is being recorded.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévenez chaque personne présente que l’appel est enregistré."
+          }
+        }
+      }
+    },
+    "The model could not be deleted.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle n'a pas pu être supprimé."
+          }
+        }
+      }
+    },
+    "The model could not be downloaded. Check your connection and try again.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle n'a pas pu être téléchargé. Vérifiez votre connexion et réessayez."
+          }
+        }
+      }
+    },
+    "The other people on the call": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres participants"
+          }
+        }
+      }
+    },
+    "The recording could not be read.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'enregistrement n'a pas pu être lu."
+          }
+        }
+      }
+    },
+    "The transcript could not be saved.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La transcription n'a pas pu être enregistrée."
+          }
+        }
+      }
+    },
+    "The transcription failed.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La transcription a échoué."
+          }
+        }
+      }
+    },
+    "The transcription model could not be loaded.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le modèle de transcription n'a pas pu être chargé."
+          }
+        }
+      }
+    },
+    "Tiro can only catch a call while it is running. Open it when you log in and you never have to think about it.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro ne détecte un appel que s’il est ouvert. Lancez-le à l’ouverture de session et vous n’aurez plus à y penser."
+          }
+        }
+      }
+    },
+    "Tiro cannot use the recordings folder": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro ne peut pas utiliser le dossier des enregistrements"
+          }
+        }
+      }
+    },
+    "Tiro could not record this call": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro n’a pas pu enregistrer cet appel"
+          }
+        }
+      }
+    },
+    "Tiro opens when you log in, and restarts if it ever stops unexpectedly.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro s’ouvre avec votre session et redémarre s’il s’arrête de façon inattendue."
+          }
+        }
+      }
+    },
+    "Tiro records your calls as audio, on this Mac, as soon as they start. It lives in the menu bar and stays out of the way.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro enregistre vos appels en audio, sur ce Mac, dès qu’ils commencent. Il se loge dans la barre des menus et se fait oublier."
+          }
+        }
+      }
+    },
+    "Tiro records your side of the call through the microphone. macOS asks you once.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro enregistre votre voix grâce au micro. macOS vous demande votre accord une seule fois."
+          }
+        }
+      }
+    },
+    "Tiro tells you when a recording starts and when it is saved. Click a notification to find the file.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro vous prévient quand un enregistrement commence et quand il est sauvegardé. Cliquez sur une notification pour retrouver le fichier."
+          }
+        }
+      }
+    },
+    "To hear them, Tiro records the sound your Mac plays during the call. macOS calls this System Audio Recording.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour les entendre, Tiro enregistre le son que votre Mac diffuse pendant l’appel. macOS appelle cela l’enregistrement de l’audio du système."
+          }
+        }
+      }
+    },
+    "Transcribe recordings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcrire les enregistrements"
+          }
+        }
+      }
+    },
+    "Transcribing · %lld waiting": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcription · %lld en attente"
+          }
+        }
+      }
+    },
+    "Transcribing…": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcription en cours…"
+          }
+        }
+      }
+    },
+    "Transcript ready": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcription prête"
+          }
+        }
+      }
+    },
+    "Transcription": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcription"
+          }
+        }
+      }
+    },
+    "Transcription by [whisper.cpp](https://github.com/ggml-org/whisper.cpp), MIT License.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcription par [whisper.cpp](https://github.com/ggml-org/whisper.cpp), licence MIT."
+          }
+        }
+      }
+    },
+    "Transcription failed": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La transcription a échoué"
+          }
+        }
+      }
+    },
+    "Troubleshooting": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépannage"
+          }
+        }
+      }
+    },
+    "Use This Model": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser ce modèle"
+          }
+        }
+      }
+    },
+    "Use a model file I already have": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser un fichier de modèle que j’ai déjà"
+          }
+        }
+      }
+    },
+    "Use with Claude": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser avec Claude"
+          }
+        }
+      }
+    },
+    "Version %@ (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Version %1$@ (%2$@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@ (%@)"
+          }
+        }
+      }
+    },
+    "Waiting for a call": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente d’un appel"
+          }
+        }
+      }
+    },
+    "Watched apps": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps surveillées"
+          }
+        }
+      }
+    },
+    "Welcome to Tiro": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenue dans Tiro"
+          }
+        }
+      }
+    },
+    "You": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous"
+          }
+        }
+      }
+    },
+    "You can download it again later.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pourrez le télécharger de nouveau plus tard."
+          }
+        }
+      }
+    },
+    "You can pause Tiro from the menu bar at any time.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez mettre Tiro en pause depuis la barre des menus à tout moment."
+          }
+        }
+      }
+    },
+    "You will also find it in Settings, General.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous le retrouverez aussi dans Réglages, Général."
+          }
+        }
+      }
+    },
+    "Your voice": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre voix"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

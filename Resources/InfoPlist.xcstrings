@@ -1,0 +1,40 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSAudioCaptureUsageDescription": {
+      "comment": "Info.plist",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro records the sound your Mac plays during a call, so the other participants are in the recording."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro enregistre le son que votre Mac diffuse pendant un appel, pour que les autres participants figurent dans l’enregistrement."
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription": {
+      "comment": "Info.plist",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro records your voice during a call through the microphone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiro enregistre votre voix pendant un appel grâce au micro."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
