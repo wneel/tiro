@@ -1,4 +1,6 @@
-# Tiro
+<p align="center">
+	<img src="assets/banner.svg" alt="Tiro records every call on your Mac and writes down every word, on-device." width="100%">
+</p>
 
 Tiro is a free, open-source macOS menu bar app that records your video calls as audio, automatically. When Google Meet, Teams, Zoom or another call app starts using the microphone, Tiro starts recording; when the call ends, it saves the file. It can also transcribe the recording on your Mac with [whisper.cpp](https://github.com/ggml-org/whisper.cpp).
 
